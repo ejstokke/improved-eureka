@@ -113,10 +113,7 @@ class University:
         for kode in University.UNI_CODES:
             all_universities.append(self.get_uni_data_json(kode))
 
-        return json.dumps(all_universities)
-
-
-        
+        return json.dumps(all_universities)        
 
 
 if __name__ == "__main__":
