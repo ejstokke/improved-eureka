@@ -2,6 +2,8 @@ from flask import Flask, request
 from StudyData import Study, University
 
 app = Flask(__name__)
+DEBUG_MODE = True
+
 
 @app.route('/universities')
 def universities():
@@ -24,10 +26,11 @@ def studies():
 
     return all_studies
 
+
 if __name__ == '__main__':
     uni = University()
     all_unis = uni.get_all_universities_json()
     study = Study()
     all_studies = study.get_all_studies_json()
-    
-    app.run(debug=True)
+
+    app.run(debug=DEBUG_MODE)
