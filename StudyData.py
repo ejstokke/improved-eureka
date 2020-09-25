@@ -25,12 +25,12 @@ class Study:
         return row.iloc[0]
 
 
-    def get_json(self, study_code):
+    def get_study_data_json(self, study_code):
         '''
         Creates a JSON object for a study
 
         Arguments:
-            study_code {string} -- [Studiekode]
+            study_code {string} -- [Studiekode fra samordna opptak]
 
         Returns:
             [String] -- [JSON]
@@ -51,6 +51,15 @@ class Study:
         return json_data
         
 
+    def get_all_studies_json(self):
+        all_studies = list()
+
+        for study_code in self.df["Studiekode"]:
+            all_studies.append(self.get_study_data_json(study_code))
+
+        return json.dumps(all_studies)
+
+
 class University:
 
     UNI_CODES = uni_codes
@@ -60,10 +69,6 @@ class University:
         self.df = df.drop(labels="Unnamed: 4", axis="columns")
 
     def __find_row(self, uni_code):
-        '''
-        Arguments:
-            uni_code {string} [Feks UIB, NHH or OSLOMET as in Study]
-        '''
         uni_name = University.UNI_CODES[uni_code]
         row = self.df.loc[self.df["Sted"] == uni_name]
         return row
@@ -76,10 +81,19 @@ class University:
         return False
 
 
-    def get_json(self, uni_code):
+    def get_uni_data_json(self, uni_code):
+        '''
+        Returns a json object with amount of male and female students for a university
+
+        Arguments:
+            uni_code {string} [Feks UIB, NHH or OSLOMET as in Study]
+
+        Returns:
+            [String] -- [JSON]
+        '''
         uni_data = {
             "Sted": None,
-            "Begge Kjønn": None,
+            "Begge kjønn": None,
             "Menn": None,
             "Kvinner": None
         }
@@ -93,18 +107,34 @@ class University:
         return json_data
 
 
+    def get_all_universities_json(self):
+        all_universities = list()
+
+        for kode in University.UNI_CODES:
+            all_universities.append(self.get_uni_data_json(kode))
+
+        return json.dumps(all_universities)
+
+
+        
+
+
 if __name__ == "__main__":
     start = time()
 
     study = Study()
-
-    koder = set()
-
     uni = University()
-    x = study.get_json("191345")
-    y = uni.get_json("UIO")
-    print(x)
-    print(y)
+
+    x = study.get_study_data_json("191345")
+    y = uni.get_uni_data_json("HVO")
+    # print(x)
+    # print(y)
+
+    all_uni = uni.get_all_universities_json()
+    all_studies = study.get_all_studies_json()
+    # print(all_uni)
+    print(len(all_studies))
+    
 
     end = time()
     print(f"Finished in {(end - start):.3f} seconds")
