@@ -1,7 +1,8 @@
 import json
 import sys
 import pandas as pd
-from timeit import timeit
+from time import time
+from uni_codes import uni_codes
 
 FILE_NAME_STUDY = "\\uhg-poenggrenser-hovedopptaket-2020.xlsx"
 FILE_NAME_UNI = "\\lærested_for_studenter.csv"
@@ -52,9 +53,7 @@ class Study:
 
 class University:
 
-    UNI_CODES = {
-        "NHH": "Norges Handelshøyskole"
-    }
+    UNI_CODES = uni_codes
 
     def __init__(self, file_location=FILE_LOCATION_UNI):
         df = pd.read_csv(file_location, sep=";", skiprows=2)
@@ -79,10 +78,10 @@ class University:
 
     def get_json(self, uni_code):
         uni_data = {
-            "Sted": "",
-            "Begge Kjønn": "",
-            "Menn": "",
-            "Kvinner": ""
+            "Sted": None,
+            "Begge Kjønn": None,
+            "Menn": None,
+            "Kvinner": None
         }
 
         if self.__uni_code_is_valid(uni_code):
@@ -95,16 +94,19 @@ class University:
 
 
 if __name__ == "__main__":
-    start = timeit()
+    start = time()
 
     study = Study()
+
+    koder = set()
+
     uni = University()
     x = study.get_json("191345")
-    y = uni.get_json("NHH")
+    y = uni.get_json("UIO")
     print(x)
     print(y)
 
-    end = timeit()
+    end = time()
     print(f"Finished in {(end - start):.3f} seconds")
     
     
