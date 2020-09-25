@@ -23,6 +23,7 @@ Returns application data about a study which includes: university, grade points 
 
 --------
 
+### Universities
 #### GET
 Returns object with amount of students at a university.
 
