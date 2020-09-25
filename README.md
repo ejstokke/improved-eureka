@@ -8,7 +8,7 @@ Windows:
 ## Running the server
 Use the following commands to run server on localhost:5000
 * `pipenv shell`
-* `python server.py`
+* `pipenv run start`
 
 ## Endpoints
 Run server.py which will start a server on localhost:5000
