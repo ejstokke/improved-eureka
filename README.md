@@ -11,15 +11,20 @@ Use the following commands to run server on localhost:5000
 * `pipenv run start`
 
 ## Endpoints
-Run server.py which will start a server on localhost:5000
 
 --------
 
+### Studies
+#### GET
+Returns application data about a study which includes: university, grade points needed, extra requirements needed.
 * `/studies` for every study course
 
 * `/studies?study=184395` to get particular study with code 184395
 
 --------
+
+#### GET
+Returns object with amount of students at a university.
 
 * `/universities`
 
