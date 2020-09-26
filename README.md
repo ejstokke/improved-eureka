@@ -16,7 +16,7 @@ Use the following commands to run server on localhost:5000
 Returns application data about a study which includes: university, grade points needed, extra requirements needed.
 * `/studies` for every study course
 
-* `/studies?study=184395` to get particular study with code 184395
+* `/studies?study=STUDIEKODE` where STUDIEKODE is e.g. 184453 for information science
 
 --------
 
@@ -26,4 +26,4 @@ Returns object with amount of students at a university.
 
 * `/universities`
 
-* `/universities?university=UIB` to get data about UIB
+* `/universities?university=UNIVERSITYCODE` where UNIVERSITYCODE is e.g. UIB for University of bergen
