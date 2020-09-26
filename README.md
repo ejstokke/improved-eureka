@@ -5,15 +5,14 @@ Windows:
 * `pip install pipenv`
 * `pipenv install`
 
-## Running the server
+--------
+
+### Running the server
 Use the following commands to run server on localhost:5000
 * `pipenv shell`
 * `pipenv run start`
 
 ## Endpoints
-
---------
-
 ### Studies
 #### GET
 Returns application data about a study which includes: university, grade points needed, extra requirements needed.
