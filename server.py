@@ -1,8 +1,23 @@
 from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
 from StudyData import Study, University
 
-app = Flask(__name__)
+
 DEBUG_MODE = True
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+class Review(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True)
+    uni_code = db.Column(db.String(7), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f"Review({self.user_id}, {self.uni_code}, {self.rating})"
+
+
+# db.create_all() # To create all tables
 
 
 @app.route('/universities')
@@ -22,7 +37,7 @@ def studies():
         try:
             return study.get_study_data_json(query)
         except:
-            return f"404: Found no study with code {query}"
+            return f"<h1>404</h1> Found no study with code {query}</p>"
 
     return all_studies
 
