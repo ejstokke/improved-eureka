@@ -1,12 +1,12 @@
 # API for MyUNI app
 ## Installation
 Windows:
-* Install [python 3.7](https://www.python.org/downloads/release/python-372/)
+* Install [python 3.8](https://www.python.org/downloads/release/python-382/)
 * `pip install pipenv`
 * `pipenv install`
 
 ## Running the server
-Use the following commands to run server on localhost:5000
+Use the following commands to run the server:
 * `pipenv shell`
 * `pipenv run start`
 
@@ -26,4 +26,4 @@ Returns object with amount of students at a university.
 
 * `/universities`
 
-* `/universities?university=UNIVERSITYCODE` where UNIVERSITYCODE is e.g. UIB for University of bergen
+* `/universities?university=UNIVERSITYCODE` where UNIVERSITYCODE is e.g. UIB for University of Bergen
