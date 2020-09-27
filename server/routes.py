@@ -14,8 +14,8 @@ all_studies = study.get_all_studies_json()
 def universities():
     query = request.args.get("university")
     if query:
-        uni_data = uni.get_uni_data_json(query)
-        if not uni_data:
+        uni_data = uni.get_uni_data_json(query) 
+        if not uni_data: 
             abort(404, description="Resource not found")
         return uni_data
 
@@ -24,10 +24,10 @@ def universities():
 
 @app.route('/studies')
 def studies():
-    query = request.args.get("study")
+    query = request.args.get("study") # Her trengs mer query-alternativer for filtrering / søk
     if query:
         try:
-            return study.get_study_data_json(query)
+            return study.get_study_data_json(query) 
         except:
             abort(404, description="Resource not found")
 
