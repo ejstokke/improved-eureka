@@ -27,3 +27,25 @@ Returns object with amount of students at a university.
 * `/universities`
 
 * `/universities?university=UNIVERSITYCODE` where UNIVERSITYCODE is e.g. UIB for University of Bergen
+
+--------
+
+### Reviews
+A review is an object consisting of a user id, the code for the university they reviewed, and a rating number.
+#### GET
+* `/user/reviews` to get all reviews
+
+* `/user/reviews?user_id=INT&uni_code=UNIVERSITYCODE` to get a specific review
+
+* `/user/reviews?uni_code=UNIVERSITYCODE` to get all reviews for a university.
+
+* `/user/reviews?user_id=INT` to get all reviews for a user
+
+#### POST
+* `/user/reviews` Post a review object.
+
+`{
+  user_id: 1,
+  uni_code: "UIB",
+  rating: 5
+}`
