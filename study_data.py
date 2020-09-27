@@ -112,8 +112,9 @@ class University:
             for col in row:
                 uni_data[col] = str(row.iloc[0][col])
 
-        json_data = json.dumps(uni_data)
-        return json_data
+            json_data = json.dumps(uni_data)
+            return json_data
+        return False
 
 
     def get_all_universities_json(self):

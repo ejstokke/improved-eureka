@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from study_data import Study, University
 
@@ -26,20 +26,22 @@ class Review(db.Model):
 def universities():
     query = request.args.get("university")
     if query:
-        return uni.get_uni_data_json(query)
+        uni_data = uni.get_uni_data_json(query)
+        if not uni_data:
+            abort(404, description="Resource not found")
+        return uni_data
 
     return all_unis
 
 
 @app.route('/studies')
 def studies():
-
     query = request.args.get("study")
     if query:
         try:
             return study.get_study_data_json(query)
         except:
-            return f"<h1>404</h1> Found no study with code {query}</p>"
+            abort(404, description="Resource not found")
 
     return all_studies
 
