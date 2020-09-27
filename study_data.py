@@ -15,6 +15,10 @@ class Study:
         self.df = pd.read_excel(file_location, skiprows=18, mangle_dupe_cols=True)
 
 
+    def __repr__(self):
+        return f"Study(file_location='{FILE_LOCATION_STUDY}')"
+
+
     def __get_grade_points(self, row):
         ord_grade, ordf_grade = row["Poenggrense"], row["Poenggrense.1"]
         return ord_grade, ordf_grade
@@ -67,6 +71,11 @@ class University:
     def __init__(self, file_location=FILE_LOCATION_UNI):
         df = pd.read_csv(file_location, sep=";", skiprows=2)
         self.df = df.drop(labels="Unnamed: 4", axis="columns")
+
+
+    def __repr__(self):
+        return f"University(file_location='{FILE_LOCATION_UNI}')"
+
 
     def __find_row(self, uni_code):
         uni_name = University.UNI_CODES[uni_code]
@@ -122,15 +131,18 @@ if __name__ == "__main__":
     study = Study()
     uni = University()
 
+    print(uni)
+    print(study)
+
     x = study.get_study_data_json("191345")
     y = uni.get_uni_data_json("HVO")
     # print(x)
     # print(y)
 
-    all_uni = uni.get_all_universities_json()
-    all_studies = study.get_all_studies_json()
+    #all_uni = uni.get_all_universities_json()
+    #all_studies = study.get_all_studies_json()
     # print(all_uni)
-    print(len(all_studies))
+    #print(len(all_studies))
     
 
     end = time()

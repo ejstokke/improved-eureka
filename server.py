@@ -1,12 +1,13 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from StudyData import Study, University
+from study_data import Study, University
 
 
 DEBUG_MODE = True
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
+
 
 class Review(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
@@ -17,6 +18,7 @@ class Review(db.Model):
         return f"Review({self.user_id}, {self.uni_code}, {self.rating})"
 
 
+# db.drop_all() # Drops all tables and rows
 # db.create_all() # To create all tables
 
 
