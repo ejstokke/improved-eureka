@@ -4,6 +4,7 @@ import pandas as pd
 from time import time
 from uni_codes import uni_codes
 
+# Might want to change this to use os.environ instead
 FILE_NAME_STUDY = "\\uhg-poenggrenser-hovedopptaket-2020.xlsx"
 FILE_NAME_UNI = "\\lærested_for_studenter.csv"
 FILE_LOCATION_STUDY = sys.path[0] + FILE_NAME_STUDY
