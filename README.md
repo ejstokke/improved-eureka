@@ -44,7 +44,7 @@ A review is an object consisting of a user id, the code for the university they 
 #### POST
 * `/user/reviews` Post a review object.
 
-`{
+* `{
   user_id: 1,
   uni_code: "UIB",
   rating: 5
