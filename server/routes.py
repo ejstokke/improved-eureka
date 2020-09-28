@@ -1,37 +1,45 @@
 from flask import request, abort
-from server.study_data import Study, University
-from server.models import Review
+from server.models import Review, University, Study
 from server.verification import review_exists
 from server import app, db
 
-uni = University()
-all_unis = uni.get_all_universities_json()
-study = Study()
-all_studies = study.get_all_studies_json()
+# uni = University()
+# all_unis = uni.get_all_universities_json()
+# study = Study()
+# all_studies = study.get_all_studies_json()
 
 
 @app.route('/universities')
 def universities():
     query = request.args.get("university")
     if query:
-        uni_data = uni.get_uni_data_json(query) 
+        uni_data = University.query.filter_by(uni_code=query.upper()).first()
         if not uni_data: 
             abort(404, description="Resource not found")
-        return uni_data
+        return str(uni_data)
 
-    return all_unis
+    return str(University.query.all())
 
 
 @app.route('/studies')
 def studies():
-    query = request.args.get("study") # Her trengs mer query-alternativer for filtrering / søk
-    if query:
-        try:
-            return study.get_study_data_json(query) 
-        except:
-            abort(404, description="Resource not found")
+    study_query = request.args.get("study_code")
+    uni_query = request.args.get("university")
 
-    return all_studies
+    if study_query:
+        result = Study.query.filter_by(study_code=study_query.upper()).all()
+        if not result:
+            abort(404, description="Resource not found")
+        return str(result)
+
+    if uni_query:
+        result = Study.query.filter_by(uni_code=uni_query.upper()).all()
+        if not result:
+            abort(404, description="Resource not found")
+        return str(result)
+            
+
+    return str(Study.query.all())
 
 
 @app.route('/universities/reviews', methods=["GET", "POST"])
