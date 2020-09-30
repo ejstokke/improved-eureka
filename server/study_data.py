@@ -163,20 +163,20 @@ def populate_database(create_table=False, wipe_data=False):
         db.session.add(uni_row)
         db.session.commit()
 
-    all_studies = study.get_all_studies()
-    for study_data in all_studies:
-        study_row = StudyModel(
-            study_code=study_data["Studiekode"],
-            programme_name=study_data["Studienavn"],
-            uni_code=study_data["Lærestedskode"],
-            education_field=study_data["Utdanningsområde"],
-            ordinary=study_data["Ordinær"],
-            ordinary_first=study_data["Førstegang"]
-        )
-        db.session.add(study_row)
-        db.session.commit()
+    # all_studies = study.get_all_studies()
+    # for study_data in all_studies:
+    #     study_row = StudyModel(
+    #         study_code=study_data["Studiekode"],
+    #         programme_name=study_data["Studienavn"],
+    #         uni_code=study_data["Lærestedskode"],
+    #         education_field=study_data["Utdanningsområde"],
+    #         ordinary=study_data["Ordinær"],
+    #         ordinary_first=study_data["Førstegang"]
+    #     )
+    #     db.session.add(study_row)
+    #     db.session.commit()
 
 
 # populate_database(create_table=True)
 # print(StudyModel.query.all())
-    
+# print(UniModel.query.all())

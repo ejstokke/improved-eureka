@@ -57,7 +57,7 @@ def reviews():
     
     if request.method == "GET":
         user_query = request.args.get("user_id")
-        uni_query = request.args.get("uni_code").upper()
+        uni_query = request.args.get("uni_code")
 
         if user_query and uni_query:
             review = Review.query.filter_by(user_id=user_query, uni_code=uni_query).first()
@@ -68,7 +68,7 @@ def reviews():
             return str(review)
 
         if uni_query:
-            review = Review.query.filter_by(uni_code=uni_query).all()
+            review = Review.query.filter_by(uni_code=uni_query.upper()).all()
             return str(review)
 
         reviews = Review.query.all()
