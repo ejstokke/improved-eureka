@@ -1,4 +1,4 @@
-from flask import request, abort
+from flask import request, abort, jsonify
 from server.models import Review, University, Study
 from server.verification import review_exists
 from server import app, db
@@ -30,7 +30,7 @@ def studies():
         result = Study.query.filter_by(study_code=study_query.upper()).all()
         if not result:
             abort(404, description="Resource not found")
-        return str(result)
+        return jsonify(result[0].return_object())
 
     if uni_query:
         result = Study.query.filter_by(uni_code=uni_query.upper()).all()
@@ -73,3 +73,22 @@ def reviews():
 
         reviews = Review.query.all()
         return str(reviews)
+
+
+@app.route('/Kategori')
+def education_fields():
+    query_result = Study.query.all()
+    fields = set()
+    for q in query_result:
+        fields.add(q.education_field)
+
+    return jsonify(list(fields))
+
+@app.route('/Sted')
+def uni_codes():
+    query_result = University.query.all()
+    fields = list()
+    for q in query_result:
+        fields.append(q.uni_code)
+
+    return jsonify(list(fields))
