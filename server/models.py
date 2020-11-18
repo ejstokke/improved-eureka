@@ -48,3 +48,13 @@ class Study(db.Model):
             "ordinary": self.ordinary,
             "ordinary_first": self.ordinary_first
         })
+
+    def return_object(self):
+        return {
+            "study_code": self.study_code,
+            "programme_name": self.programme_name,
+            "uni_code": self.uni_code,
+            "education_field": self.education_field,
+            "ordinary": self.ordinary,
+            "ordinary_first": self.ordinary_first
+        }
